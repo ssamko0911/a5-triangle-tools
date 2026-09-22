@@ -1,8 +1,8 @@
 /*
- * @(#)Scanner.java                       
- * 
+ * @(#)Scanner.java
+ *
  * Revisions and updates (c) 2022-2025 Sandy Brownlee. alexander.brownlee@stir.ac.uk
- * 
+ *
  * Original release:
  *
  * Copyright (C) 1999, 2003 D.A. Watt and D.F. Brown
@@ -39,7 +39,7 @@ public final class Scanner {
 
 	public static boolean isOperator(char c) {
 		return (c == '+' || c == '-' || c == '*' || c == '/' || c == '=' || c == '<' || c == '>' || c == '\\'
-				|| c == '&' || c == '@' || c == '%' || c == '^' || c == '?');
+				|| c == '&' || c == '@' || c == '%' || c == '^' || c == '?' || c == '|');
 	}
 
 	///////////////////////////////////////////////////////////////////////////////
@@ -67,19 +67,31 @@ public final class Scanner {
 
 	private void scanSeparator() {
 		switch (currentChar) {
-		
+
 		// comment
-		case '!': 
+		case '!', '#':
 			takeIt();
-			
+
 			// the comment ends when we reach an end-of-line (EOL) or end of file (EOT - for end-of-transmission)
 			while ((currentChar != SourceFile.EOL) && (currentChar != SourceFile.EOT))
 				takeIt();
 			if (currentChar == SourceFile.EOL)
 				takeIt();
 			break;
+        // multiline comment
+        case '$':
+            do {
+                takeIt();
+            }
+            // the comment ends when we reach the same char - '$'
+            while (currentChar != '$');
 
-		// whitespace
+            if (currentChar == '$') {
+                takeIt();
+            }
+
+            break;
+        // whitespace
 		case ' ':
 		case '\n':
 		case '\r':
@@ -178,6 +190,7 @@ public final class Scanner {
 		case '%':
 		case '^':
 		case '?':
+		case '|':
 			takeIt();
 			while (isOperator(currentChar))
 				takeIt();
@@ -257,7 +270,7 @@ public final class Scanner {
 		currentlyScanningToken = false;
 		// skip any whitespace or comments
 		while (currentChar == '!' || currentChar == ' ' || currentChar == '\n' || currentChar == '\r'
-				|| currentChar == '\t')
+				|| currentChar == '\t' || currentChar == '#' || currentChar == '$')
 			scanSeparator();
 
 		currentlyScanningToken = true;
