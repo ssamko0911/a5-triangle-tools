@@ -1,23 +1,23 @@
 let
-  func add (a: Integer, b: Integer): Integer ~
-   a + b;
+    func add (a: Integer, b: Integer): Integer ~
+        a + b;
 
-  func multiply (a: Integer, b: Integer): Integer ~
-   a * b;
+    func multiply (a: Integer, b: Integer): Integer ~
+        a * b;
 
-  var firstDigit : Integer;
-  var secondDigit : Integer
+    var firstDigit : Integer;
+    var secondDigit : Integer
 in
-  begin
-  getint (var firstDigit);
-  getint (var secondDigit);
-  putint (add (firstDigit, secondDigit)); puteol();
-  putint (multiply (firstDigit, secondDigit)); puteol();
+    begin
+        getint (var firstDigit);
+        getint (var secondDigit);
+        putint (add (firstDigit, secondDigit)); puteol();
+        putint (multiply (firstDigit, secondDigit)); puteol();
 
-    if firstDigit = secondDigit
-    then
-      begin
-        put ('S'); put ('a'); put ('m'); put ('e'); put ('!');
-      end
-    else
-  end
+        if firstDigit = secondDigit
+            then
+                begin
+                    put ('S'); put ('a'); put ('m'); put ('e'); put ('!');
+                end
+            else
+        end
