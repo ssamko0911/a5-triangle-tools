@@ -40,6 +40,8 @@ public final class StdEnvironment {
 
 	public static UnaryOperatorDeclaration notDecl;
 
+    public static UnaryOperatorDeclaration barDecl;
+
 	public static BinaryOperatorDeclaration andDecl, orDecl, addDecl, subtractDecl, multiplyDecl, divideDecl,
 			moduloDecl, equalDecl, unequalDecl, lessDecl, notlessDecl, greaterDecl, notgreaterDecl;
 
