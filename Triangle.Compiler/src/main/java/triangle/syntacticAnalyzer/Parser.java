@@ -282,12 +282,23 @@ public class Parser {
 				commandAST = new CallCommand(iAST, apsAST, commandPos);
 
 			} else {
-
 				Vname vAST = parseRestOfVname(iAST);
-				accept(Token.Kind.BECOMES);
-				Expression eAST = parseExpression();
-				finish(commandPos);
-				commandAST = new AssignCommand(vAST, eAST, commandPos);
+
+                if(currentToken.kind == Token.Kind.INCREMENT) {
+                    acceptIt();
+                    VnameExpression vnameExpression = new VnameExpression(vAST, commandPos);
+                    Operator oAST = new Operator("+", commandPos);
+                    IntegerLiteral integerLiteral = new IntegerLiteral("1", commandPos);
+                    IntegerExpression integerExpression = new IntegerExpression(integerLiteral, commandPos);
+                    BinaryExpression incrementExpression = new BinaryExpression(vnameExpression, oAST, integerExpression, commandPos);
+                    finish(commandPos);
+                    commandAST = new AssignCommand(vAST, incrementExpression, commandPos);
+                } else {
+                    accept(Token.Kind.BECOMES);
+                    Expression eAST = parseExpression();
+                    finish(commandPos);
+                    commandAST = new AssignCommand(vAST, eAST, commandPos);
+                }
 			}
 		}
 			break;

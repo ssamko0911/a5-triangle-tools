@@ -58,7 +58,7 @@ final class Token {
 		PROC("proc"), RECORD("record"), REPEAT("repeat"), THEN("then"), TYPE("type"), UNTIL("until"), VAR("var"), WHILE("while"),
 
 		// punctuation...
-		DOT("."), COLON(":"), SEMICOLON(";"), COMMA(","), BECOMES(":="), IS("~"),
+		DOT("."), COLON(":"), SEMICOLON(";"), COMMA(","), BECOMES(":="), IS("~"), INCREMENT("++"),
 
 		// brackets...
 		LPAREN("("), RPAREN(")"), LBRACKET("["), RBRACKET("]"), LCURLY("{"), RCURLY("}"),
