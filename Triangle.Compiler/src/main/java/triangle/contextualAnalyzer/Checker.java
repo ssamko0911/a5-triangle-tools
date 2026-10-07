@@ -960,6 +960,11 @@ public final class Checker implements ActualParameterVisitor<FormalParameter, Vo
 
     @Override
     public Void visitRepeatCommand(RepeatCommand repeatCommand, Void unused) {
+        var eType = repeatCommand.E.visit(this);
+
+        checkAndReportError(eType.equals(StdEnvironment.booleanType), "Boolean expression expected here", repeatCommand.E);
+        repeatCommand.C.visit(this);
+
         return null;
     }
 }

@@ -788,6 +788,10 @@ public final class Encoder implements ActualParameterVisitor<Frame, Integer>,
 
     @Override
     public Void visitRepeatCommand(RepeatCommand repeatCommand, Frame frame) {
+        var loopAddr = emitter.getNextInstrAddr();
+        repeatCommand.C.visit(this, frame);
+        repeatCommand.E.visit(this, frame);
+        emitter.emit(OpCode.JUMPIF, Machine.falseRep, Register.CB, loopAddr);
         return null;
     }
 }
